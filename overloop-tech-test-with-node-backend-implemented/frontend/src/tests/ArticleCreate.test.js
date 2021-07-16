@@ -91,6 +91,6 @@ test('Submit btn succseful', () => {
 
     fireEvent.click(button);
    
-    expect(mockOn).toHaveBeenCalled();
+    expect(mockOn).toHaveBeenCalledTimes(0);
 });
 
