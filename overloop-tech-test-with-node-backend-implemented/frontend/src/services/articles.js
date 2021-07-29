@@ -5,6 +5,10 @@ export const listArticles = async () => {
     return response.data;
 };
 
+export const filteredArticals = async (regions) => {
+    const response = await api.post('filteredArticles', regions);
+    return response.data;
+}
 export const getArticle = async (articleId) => {
     const response = await api.get(`articles/${articleId}`);
     return response.data;

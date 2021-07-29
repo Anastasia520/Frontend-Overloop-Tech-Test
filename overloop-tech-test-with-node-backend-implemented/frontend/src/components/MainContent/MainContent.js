@@ -9,7 +9,8 @@ import {
     ROUTE_ARTICLE_EDIT,
     ROUTE_AUTHOR_LIST,
     ROUTE_AUTHOR_CREATE,
-    ROUTE_AUTHOR_EDIT
+    ROUTE_AUTHOR_EDIT,
+    ROUTE_ARTICLE_FILTERED
 } from '../../constants';
 import ArticleList from '../../pages/ArticleList/ArticleList';
 import ArticleCreate from '../../pages/ArticleCreate/ArticleCreate';
@@ -40,6 +41,9 @@ function MainContent() {
                     </Route>
                     <Route path={ ROUTE_ARTICLE_EDIT }>
                         <ArticleEdit />
+                    </Route>
+                    <Route path={ ROUTE_ARTICLE_FILTERED }>
+                        <Redirect to={ ROUTE_ARTICLE_LIST } />
                     </Route>
                     <Route path={ ROUTE_HOME }>
                         <Redirect to={ ROUTE_ARTICLE_LIST } />

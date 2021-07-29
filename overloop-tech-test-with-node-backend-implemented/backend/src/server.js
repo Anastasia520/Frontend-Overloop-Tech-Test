@@ -24,6 +24,7 @@ import './models';
     app.get('/hello/', (req, res) => res.json({ status: 'ok' }));
 
     app.get('/articles', articles.list);
+    app.post('/filteredArticals', articles.filtered);
     app.get('/articles/:articleId', articles.get);
     app.post('/articles', articles.create);
     app.put('/articles/:articleId', articles.update);

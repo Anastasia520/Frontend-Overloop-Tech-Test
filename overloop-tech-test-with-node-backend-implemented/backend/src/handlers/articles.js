@@ -1,10 +1,31 @@
 import Article from '../models/Article';
+import Region from '../models/Region';
 
 export default {
     list: async (req, res, next) => {
         try {
             const articles = await Article.findAll({ include: ['author', 'regions'] });
             return res.json(articles);
+        } catch (err) {
+            next(err);
+        }
+    },
+    filtered: async (req, res, next) => {
+        try {
+            const regions = req.body;
+
+            const articles = await Article.findAll({ include: ['author', 'regions'] });
+            const filteredData = articles.filter((artical) => {
+                return (
+                    artical.regions.length === regions.length &&
+                    artical.regions.every((regionOne) => {
+                        return regions.some((regionTwo) => {
+                            return regionOne.id === regionTwo.id;
+                        });
+                    })
+                );
+            });
+            return res.json(filteredData);
         } catch (err) {
             next(err);
         }

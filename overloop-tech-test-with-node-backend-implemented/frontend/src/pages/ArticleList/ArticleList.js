@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import { ROUTE_ARTICLE_PREFIX, ROUTE_ARTICLE_CREATE } from '../../constants';
-import { listArticles } from '../../services/articles';
+import { listArticles, filteredArticals } from '../../services/articles';
 import RegionDropdown from '../../components/RegionDropdown/RegionDropdown';
 import Form from 'react-bootstrap/Form';
 
@@ -13,16 +13,17 @@ function ArticleList() {
         const fetchArticles = async () => {
             const data = await listArticles();
             if (regions.length > 0) {
-                const filteredData = data.filter((artical) => {
-                    return (
-                        artical.regions.length === regions.length &&
-                        artical.regions.every((regionOne) => {
-                            return regions.some((regionTwo) => {
-                                return regionOne.id === regionTwo.id;
-                            });
-                        })
-                    );
-                });
+                const filteredData = await filteredArticals(regions);
+                // const filteredData = data.filter((artical) => {
+                //     return (
+                //         artical.regions.length === regions.length &&
+                //         artical.regions.every((regionOne) => {
+                //             return regions.some((regionTwo) => {
+                //                 return regionOne.id === regionTwo.id;
+                //             });
+                //         })
+                //     );
+                // });
                 setArticles(filteredData);
             }
             else
